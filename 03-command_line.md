@@ -20,8 +20,18 @@ Here's a list of items with which you should be familiar:
 
 Make a cheat sheet for yourself: a list of at least **ten** commands and what they do.  (Use the 8 items above and add a couple of your own.)  
 
-> > REPLACE THIS TEXT WITH YOUR RESPONSE
+> > __Command Cheat Sheet__ 
 
+* show current working directory path - ls
+* creating a directory: mkdir
+* deleting a directory: rm -rf
+* creating a file using `touch` command: touch file
+* deleting a file:  rm -f
+* renaming a file:  mv file1 file2
+* listing hidden files: ls -a
+* copying a file from one directory to another: cp -r dir1 dir2
+* find a file containing name foo starting in current dir: find . -name foo
+* concatenate two files and write to new file: cat file1 file2 > newfile
 ---
 
 ### Q2.  List Files in Unix   
@@ -35,15 +45,28 @@ What do the following commands do:
 `ls -t`  
 `ls -Glp`  
 
-> > REPLACE THIS TEXT WITH YOUR RESPONSE
+> > __List Commands__
 
+* `ls`: Directory Listing  
+* `ls -a`: Directory listing with hidden files that start with '.' 
+* `ls -l`: Directory listing long format and permissions  
+* `ls -lh`: Directory listing long format and human readable  
+* `ls -lah`: Directory listing long format human readable including hidden files   
+* `ls -t`: Directory listing sorted by time and date  
+* `ls -Glp`: Direcotry listing colorized, long formatting, and slash after each directory
 ---
 
 ### Q3.  More List Files in Unix  
 
 Explore these other [ls options](http://www.techonthenet.com/unix/basic/ls.php) and pick 5 of your favorites:
 
-> > REPLACE THIS TEXT WITH YOUR RESPONSE
+> > __Favorite List Commands__
+
+* `ls -m`: Comma separated list
+* `ls -d */`: Displays directories within current directly, only
+* `ls -1`: Displays each entry on a separate line
+* `ls -lt`: Long format and newest first
+* `ls -R`: Also dispays sub directories
 
 ---
 
@@ -51,7 +74,9 @@ Explore these other [ls options](http://www.techonthenet.com/unix/basic/ls.php) 
 
 What does `xargs` do? Give an example of how to use it.
 
-> > REPLACE THIS TEXT WITH YOUR RESPONSE
+> > __Xargs Example__
+xargs is used to convert the standard input into arguments
+
+* find . -name foo | xargs vim 
 
  
-
