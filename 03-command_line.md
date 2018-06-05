@@ -63,7 +63,7 @@ Explore these other [ls options](http://www.techonthenet.com/unix/basic/ls.php) 
 > > __Favorite List Commands__
 
 * `ls -m`: Comma separated list
-* `ls -d */`: Displays directories within current directly, only
+* `ls -d */`: Displays directories within current directory only
 * `ls -1`: Displays each entry on a separate line
 * `ls -lt`: Long format and newest first
 * `ls -R`: Also dispays sub directories
