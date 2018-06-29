@@ -86,15 +86,36 @@ Bayes' Theorem is an important tool in understanding what we really know, given 
 
 Elvis Presley had a twin brother who died at birth.  What is the probability that Elvis was an identical twin? Assume we observe the following probabilities in the population: fraternal twin is 1/125 and identical twin is 1/300.  
 
->> REPLACE THIS TEXT WITH YOUR RESPONSE
+>>> ## Problem 5 Solution
+Since there are two types of twins, fraternal and identical, each with different probabilities of occurence in the population.
+First compute the probability that given the twin is fraternal or identical, the twin is also a boy.
+For identical it's 50-50 since the gender has to be the same. However for fraternal, it's actually 25% since the twin can be b-g, g-b, b-b, or g-g. 
+Finally, this is a conditional problem, which means you need to compute the probability of identical given twin brother. This is done by computing total probability of twin (demoninator) and then dividing the probability of both identical twin and twin brother to get the probability Elvis's twin brother was identical.
 
+```python
+from IPython.display import display, Math, Latex
+# Identical Twin and Twin Brother
+
+display(Math(r'P(Identical\:Twin \:and \:Twin \:Brother) = \frac{1}{300}\cdot\frac{1}{2}'))
+
+# Fraternal Twin and Twin Brother
+
+display(Math(r'P(Fraternal\:Twin \:and \:Twin \:Brother) = \frac{1}{125}\cdot\frac{1}{4}'))
+
+# Conditional probability
+
+display(Math(r'P(Identical\:Twin \:| \:Twin \:Brother) = \frac{\frac{1}{300}\cdot\frac{1}{2}}{\frac{1}{125}\cdot\frac{1}{4} + \frac{1}{300}\cdot\frac{1}{2}} = \frac{5}{11}'))
+
+```
 ---
 
 ### Q6. Bayesian &amp; Frequentist Comparison  
 How do frequentist and Bayesian statistics compare?
 
->> REPLACE THIS TEXT WITH YOUR RESPONSE
+>> ## Problem 6 Solution 
+A frequentist point of view can only build up a confidence interval by repeatedly measuring large samples of data and then creating an upper and lower bound around an unknown parameter. For example, given a large enough sample size about the height of someone, there is a confidence interval that will encapsulate the parameter measured to 95%. 
 
+This is different from Bayesian point of view, which has prior knowledge about a distrubition. The measurement h is used to adjust the prior distrubtion, resulting in a new distrubtion. 
 ---
 
 ## <a name="section-e"></a>5.  Optional Exercises
