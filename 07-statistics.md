@@ -68,17 +68,88 @@ $ git clone https://github.com/AllenDowney/ThinkStats2.git
 Cohen's D is an example of effect size.  Other examples of effect size are:  correlation between two variables, mean difference, regression coefficients and standardized test statistics such as: t, Z, F, etc. In this example, you will compute Cohen's D to quantify (or measure) the difference between two groups of data.   
 
 You will see effect size again and again in results of algorithms that are run in data science.  For instance, in the bootcamp, when you run a regression analysis, you will recognize the t-statistic as an example of effect size.
+>>> ## Problem 1 Solution
+Computing the mean difference
+```python
+first_mean = firsts.totalwgt_lb.mean()
+others_mean = others.totalwgt_lb.mean()
+diff_mean = first_mean - others_mean
+print(diff_mean)
+```
+
+First babies are lighter than others, with a mean difference 
+around 0.125 lbs
+
+Now computing the Cohen D we can quanitfy the variability between two groups
+```python
+cd = CohenEffectSize(firsts.totalwgt_lb,others.totalwgt_lb)
+print(cd)
+```
+This turns out to be 0.08 std different, which is somewhere between small
+and very small difference
 
 ### Q2. [Think Stats Chapter 3 Exercise 1](statistics/3-1-actual_biased.md) (actual vs. biased)
 This problem presents a robust example of actual vs biased data.  As a data scientist, it will be important to examine not only the data that is available, but also the data that may be missing but highly relevant.  You will see how the absence of this relevant data will bias a dataset, its distribution, and ultimately, its statistical interpretation.
 
+>>>## Problem 2 Solution 
+The pmf of the biased sample versus the unbiased sample is a pretty large 
+biased for surveying children under 18. Here the missing data biases the data set, 
+as it doesn't account for families without children at all. 
+```python
+resp = nsfg.ReadFemResp()
+numkdhh = resp.numkdhh
+pmf = thinkstats2.Pmf(numkdhh, label='numkdhh')
+biaspmf = BiasPmf(pmf,'Biased PMF')
+thinkplot.PrePlot(2)
+thinkplot.Pmfs([pmf, biaspmf])
+thinkplot.Config(xlabel='# of children', ylabel='PMF')
+diff_mean = 100*(pmf.Mean() - biaspmf.Mean())
+print(diff_mean)
+``` 
+pretty large difference!
 ### Q3. [Think Stats Chapter 4 Exercise 2](statistics/4-2-random_dist.md) (random distribution)  
 This questions asks you to examine the function that produces random numbers.  Is it really random?  A good way to test that is to examine the pmf and cdf of the list of random numbers and visualize the distribution.  If you're not sure what pmf is, read more about it in Chapter 3.  
+>>>## Problem 3 Solution
+The CDF should converge to linear with large enough samples, for 1000 samples it should be approximately linear. The PMF should have the same
+height at every number drawn, which should look like a large block between 0 and 1. 
 
+Plotting out the CDF and PMF confirms that pythons random number generator is sufficiently uniform.
+```python
+# Generate 1000 random numbers
+rando = np.random.random(1000)
+pmf = thinkstats2.Pmf(rando)
+thinkplot.Pmf(pmf, linewidth='0.1')
+thinkplot.Config(xlabel='Random numbers between 0 and 1', ylabel='PMF')
+# Now a CDF
+cdf = thinkstats2.Cdf(rando)
+thinkplot.Cdf(cdf)
+thinkplot.Config(xlabel='Random numbers between 0 and 1', ylabel='CDF')
+```
+ 
 ### Q4. [Think Stats Chapter 5 Exercise 1](statistics/5-1-blue_men.md) (normal distribution of blue men)
 This is a classic example of hypothesis testing using the normal distribution.  The effect size used here is the Z-statistic. 
 
-
+As it turns out, I qualify for the blue man group at 5'11" (although I am female)
+along with 34.2% of the male population. 
+```python
+low = 177.8
+high = 185.4
+diff_bound = dist.cdf(high) - dist.cdf(low)   
+print(diff_bound)
+```
+If I recompute for females, then 2% of those will qualify for the female
+blue woman group. 
+```python
+mu = 163
+sigma = 7.3
+dist = scipy.stats.norm(loc=mu, scale=sigma)
+dist.mean(), dist.std()
+dist.cdf(mu-sigma)
+low = 177.8
+high = 185.4
+diff_bound_female = dist.cdf(high) - dist.cdf(low)   
+print(diff_bound_female)
+```
 
 ### Q5. Bayesian (Elvis Presley twin) 
 
@@ -114,7 +185,6 @@ How do frequentist and Bayesian statistics compare?
 
 >> ## Problem 6 Solution 
 A frequentist point of view can only build up a confidence interval by repeatedly measuring large samples of data and then creating an upper and lower bound around an unknown parameter. For example, given a large enough sample size about the height of someone, there is a confidence interval that will encapsulate the parameter measured to 95%. 
-
 This is different from Bayesian point of view, which has prior knowledge about a distrubition. The measurement h is used to adjust the prior distrubtion, resulting in a new distrubtion. 
 ---
 
